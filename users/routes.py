@@ -86,7 +86,24 @@ def get_saved_posts():
             "id": p.id,
             "title": p.title,
             "author": p.author.username,
+            "claps": p.claps,
+            "image": p.image,
+            "content": p.content[:150] + "...",
             "tags": p.tags,
         }
         for p in posts
+    ])
+
+# GET ALL USERS
+@users_bp.get("/")
+def get_all_users():
+    users = User.query.all()
+    return jsonify([
+        {
+            "id": u.id,
+            "email": u.email,
+            "username": u.username,
+            "userImg": u.profile_picture
+        }
+        for u in users
     ])
