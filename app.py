@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from extensions import db, bcrypt, jwt
 from config import Config
+import os
 
 migrate = Migrate()
 
