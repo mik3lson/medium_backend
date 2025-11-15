@@ -33,5 +33,11 @@ def create_app():
 
 app = create_app()
 
+UPLOAD_FOLDER = 'static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# Ensure the upload directory exists
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 if __name__ == "__main__":
     app.run(debug=True)
