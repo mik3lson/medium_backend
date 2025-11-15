@@ -34,8 +34,12 @@ def create_post():
     user_id = get_jwt_identity()
     
     # 1. Get Text Data
-    title = request.form.get("title")
-    content = request.form.get("content")
+    title = request.form.get("title").strip()
+    content = request.form.get("content").strip()
+
+    if not title or not content:
+        return jsonify({"error": "Title and content are required"}), 422
+    
     tags_string = request.form.get("tags", "[]")
     
     tags_list = []
