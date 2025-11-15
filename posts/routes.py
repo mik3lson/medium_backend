@@ -38,10 +38,12 @@ def create_post():
     content = request.form.get("content")
     tags_string = request.form.get("tags", "[]")
     
-    try:
-        tags_list = json.loads(tags_string)
-    except json.JSONDecodeError:
-        return jsonify({"error": "Invalid tags format"}), 422
+    tags_list = []
+    if tags_string and tags_string.strip():
+        try:
+            tags_list = json.loads(tags_string)
+        except json.JSONDecodeError:
+            return jsonify({"error": "Invalid tags format"}), 422
 
     # 2. Get Image File
     image_file = request.files.get("photo")
