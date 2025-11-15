@@ -32,6 +32,9 @@ def create_post():
 @jwt_required()
 def create_post():
     user_id = get_jwt_identity()
+    if user_id is None:
+    # If the user ID is None, the token is invalid/missing required claims
+        return jsonify({"error": "Invalid or expired token claims"}), 401
     
     # 1. Get Text Data
     title = request.form.get("title").strip()
