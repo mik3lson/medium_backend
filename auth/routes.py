@@ -27,7 +27,7 @@ def register():
     db.session.commit()
 
     token = create_access_token(identity=user.id)
-    return jsonify({"token": token, "user_id": user.id})
+    return jsonify({"token": token, "user_id": user.id , "email": user.email, "username": user.username})
 
 @auth_bp.post("/login")
 def login():
@@ -40,7 +40,7 @@ def login():
         return jsonify({"error": "Invalid credentials"}), 401
 
     token = create_access_token(identity=user.id)
-    return jsonify({"token": token, "user_id": user.id})
+    return jsonify({"token": token, "user_id": user.id, "email": user.email, "username": user.username})
 
 
 
